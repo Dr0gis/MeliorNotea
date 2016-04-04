@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	$mongo = new MongoClient('localhost');
 	$db = $mongo->test;
 	$collectionNotes = $db->notes;
@@ -9,9 +9,37 @@
 		$collectionNotes->insert(
 			array(
 				'dateCreate' => date('d.m.Y H:i:s'),
+				'dateRead' => date('d.m.Y H:i:s'),
+				'dateEdit' => date('d.m.Y H:i:s'),
+				'title' => 'Пример',
+				'data' => 'Моя первая записка',
+				'user' => 'Example' . $i
+			)
+		);
+	}
+	for ($i = 1; $i <= 10; $i++) //Добавление данных в базу даннх
+	{
+		$collectionNotes->insert(
+			array(
+				'dateCreate' => date('d.m.Y H:i:s'),
+				'dateRead' => date('d.m.Y H:i:s'),
+				'dateEdit' => date('d.m.Y H:i:s'),
 				'title' => 'Пример',
 				'data' => 'Моя вторая записка',
-				'user' => 'Example' . $i,
+				'user' => 'Example' . $i
+			)
+		);
+	}
+	for ($i = 1; $i <= 10; $i++) //Добавление данных в базу даннх
+	{
+		$collectionUsers->insert(
+			array(
+				'e-mail' => 'example' . $i . '@mail.com',
+				'login' => 'example' . $i . '@mail.com',
+				'password' => 'psw123',
+				'name' => 'Example' . $i,
+				'dateBirth' => date('d.m.Y H:i:s'),
+				'sex' => 'Male'
 			)
 		);
 	}*/
@@ -21,6 +49,8 @@
 	foreach ($cursorNotes as $obj)
 	{
 		$textNodes .= 'Дата создания: ' . $obj['dateCreate'] . PHP_EOL;
+		$textNodes .= 'Дата просмотра: ' . $obj['dateRead'] . PHP_EOL;
+		$textNodes .= 'Дата редактирования: ' . $obj['dateEdit'] . PHP_EOL;
 		$textNodes .= 'Заголовок: ' . $obj['title'] . PHP_EOL;
 		$textNodes .= 'Данные: ' . $obj['data'] . PHP_EOL;
 		$textNodes .= 'Пользователь: ' . $obj['user'] . PHP_EOL;
@@ -32,8 +62,11 @@
 	foreach ($cursorUsers as $obj)
 	{
 		$textUsers .= 'E-mail: ' . $obj['e-mail'] . PHP_EOL;
+		$textUsers .= 'Login: ' . $obj['login'] . PHP_EOL;
 		$textUsers .= 'Пароль: ' . $obj['password'] . PHP_EOL;
 		$textUsers .= 'Имя: ' . $obj['name'] . PHP_EOL;
+		$textUsers .= 'Дата рождения: ' . $obj['dateBirth'] . PHP_EOL;
+		$textUsers .= 'Пол: ' . $obj['sex'] . PHP_EOL;
 		$textUsers .= PHP_EOL;
 	}
 	
